@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Registro de voluntario</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+/* Estilo general de la página */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eaf7f2;
+  color: #263238;
+  margin: 0;
+  padding: 30px;
+}
+
+/* Título */
+h1 {
+  text-align: center;
+  color: #2b9130;
+  margin-bottom: 25px;
+}
+
+/* Tarjeta del formulario */
+form {
+  width: 400px;
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Texto de cada campo */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #356859;
+}
+
+/* Inputs y select */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #b8d8cc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Cuando el usuario selecciona un campo */
+input:focus,
+select:focus {
+  border-color: #26a69a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(38, 166, 154, 0.4);
+}
+
+.mensaje-error {
+  color: #c62828;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* Botón */
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+
+  background-color: #ff774d;
+  color: #263238;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Cuando el mouse pasa por el botón */
+button:hover {
+  background-color: #ff774d;
+}
+</style>
+</head> 
+<body>
+
+  <header>
+
+
+    <nav>
+      <a href="inicio.html">← Volver al inicio</a>
+    </nav>
+
+  </header>
+
+<h1> Formulario de registro de voluntario</h1>
+<form id="registroForm" novalidate>
+
+  <label for="full_name">Nombre completo:</label>
+  <input type="text" id="full_name" name="full_name" placeholder="Jane Doe" >
+  <p id="error_nombre" class="mensaje-error"></p>
+
+  <label for="email_addr">Dirección de correo electrónico:</label>
+  <input type="email" id="email_addr" name="email_addr">
+  <p id="error_email" class="mensaje-error"></p>
+
+  <label for="email_addr_repeat">Repita su dirección de correo electrónico:</label>
+  <input type="email" id="email_addr_repeat" name="email_addr_repeat" oninput="checkemail(this)">
+  <p id="error_email_repeat" class="mensaje-error"></p>
+
+  <label for="cel">Número de teléfono (+56):</label>
+  <input type="tel" id="cel" name="cel">
+  <p id="error_cel" class="mensaje-error"></p>
+
+  <label for="region">Región:</label>
+    <select id="region" name="region">
+        <option value="">Seleccione una región</option>
+        <option value="metropolitana">Región Metropolitana</option>
+        <option value="valparaiso">Región de Valparaíso</option>
+        <option value="ohiggins">Región de O'Higgins</option>
+        <option value="maule">Región del Maule</option>
+        <option value="biobio">Región del Biobío</option>
+        <option value="araucania">Región de La Araucanía</option>
+        <option value="losrios">Región de Los Ríos</option>
+        <option value="loslagos">Región de Los Lagos</option>
+        <option value="aysen">Región de Aysén</option>
+        <option value="magallanes">Región de Magallanes</option>
+        <option value="arica">Región de Arica</option>
+        <option value="tarapaca">Región de Tarapacá</option>
+        <option value="antofagasta">Región de Antofagasta</option>
+        <option value="atacama">Región de Atacama</option>
+        <option value="coquimbo">Región de Coquimbo</option>
+        <option value="ñuble">Región de Ñuble</option>
+    </select>
+  <p id="error_region" class="mensaje-error"></p>
+
+    <br><br> 
+
+  <label for="comuna">Comuna:</label>
+  <input type="text" id="comuna" name="comuna">
+  <p id="error_comuna" class="mensaje-error"></p>
+
+  <!-- <label>contraseña<a href=""></a>:</label>
+  <input type="password" id="password" name="password">
+
+  <label>Repita su contraseña:</label>
+  <input type="password" id="password_repeat" name="password_repeat" oninput="checkPassword(this)"> -->
+
+  <!-- <input type="submit" value="Request Reservation">  -->
+  <button type="submit">Registrar voluntario</button>
+</form>
+
+<script src="registro.js"></script>
+
+</body></html>
