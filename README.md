@@ -244,7 +244,6 @@ Este proyecto corresponde a un prototipo frontend. Por esta razón:
 - No existe autenticación de usuarios.
 - Los registros mostrados en el listado son datos de ejemplo.
 - Los datos de voluntarios utilizados en las estadísticas son ficticios.
-
-  **Las fotos fueron tomadas por mi, por lo tanto no poseen derechos de autor.**
+- **Las fotos fueron tomadas por mi, por lo tanto no poseen derechos de autor.**
 
 El objetivo principal de la implementación es demostrar el flujo de navegación, las interfaces, las validaciones de los formularios y las distintas formas de consultar la información.
