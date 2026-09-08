@@ -169,7 +169,7 @@ function crearAvistamiento(avistamiento) {
   hora.textContent =
     "Hora: " + avistamiento.hora;
 
-    
+
   let evidencia;
 
   if (avistamiento.tipoArchivo === "imagen") {
@@ -200,9 +200,11 @@ function crearAvistamiento(avistamiento) {
 
 
 
-  articulo.appendChild(evidencia);
+  
 
   articulo.appendChild(titulo);
+
+  articulo.appendChild(evidencia);
 
   articulo.appendChild(tipo);
 
@@ -279,18 +281,6 @@ function crearPaginacion(lista) {
 
 
 filtroTipo.addEventListener(
-  "change",
-  function() {
-
-    paginaActual = 1;
-
-    actualizarListado();
-
-  }
-);
-
-
-orden.addEventListener(
   "change",
   function() {
 
