@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Registro de avistamiento de aves</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+/* Estilo general de la página */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eaf7f2;
+  color: #263238;
+  margin: 0;
+  padding: 30px;
+}
+
+/* Título */
+h1 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 25px;
+}
+
+/* Tarjeta del formulario */
+form {
+  width: 400px;
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Texto de cada campo */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #356859;
+}
+
+/* Inputs y select */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #b8d8cc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Cuando el usuario selecciona un campo */
+input:focus,
+select:focus {
+  border-color: #26a69a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(38, 166, 154, 0.4);
+}
+.mensaje-error {
+  color: #c62828;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* Botón */
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+
+  background-color: #ff7626;
+  color: #263238;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Cuando el mouse pasa por el botón */
+button:hover {
+  background-color: #ff7626;
+}
+</style>
+</head> 
+<body>
+
+<header>
+
+    <nav>
+      <a href="intermedio.html">← Volver al menú</a>
+    </nav>
+
+  </header>
+
+<main>
+<h1>Registro de avistamiento</h1>
+
+<form id="form-avistamiento" novalidate>
+
+  <p>(*) Campos obligatorios</p>
+
+
+  <fieldset>
+
+    <legend>Información del ave</legend>
+
+    <label for="tipo_ave">Tipo de ave (*):</label>
+
+    <select id="tipo_ave" name="tipo_ave">
+
+      <option value="">
+        Seleccione un tipo de ave
+      </option>
+
+      <option value="rapaz_diurna">
+        Rapaz diurna
+      </option>
+
+      <option value="rapaz_nocturna">
+        Rapaz nocturna
+      </option>
+
+      <option value="carronera">
+        Carroñera
+      </option>
+
+      <option value="acuatica">
+        Acuática
+      </option>
+
+      <option value="marina">
+        Marina
+      </option>
+
+      <option value="pinguino">
+        Pingüino
+      </option>
+
+      <option value="paseriforme">
+        Ave cantora / paseriforme
+      </option>
+
+      <option value="picaflor">
+        Picaflor
+      </option>
+
+      <option value="carpintero">
+        Carpintero
+      </option>
+
+      <option value="loro">
+        Loro / cotorra
+      </option>
+
+      <option value="perdiz">
+        Ave terrestre / no voladora
+      </option>
+
+      <option value="nandu">
+        Ñandú
+      </option>
+
+      <option value="otra">
+        Otra / No sé identificar
+      </option>
+
+    </select>
+
+    <p id="error_tipo" class="mensaje-error"></p>
+
+
+    <label for="nombre_ave">
+      Nombre del ave (*):
+    </label>
+
+    <input
+      type="text"
+      id="nombre_ave"
+      name="nombre_ave"
+      placeholder="Cóndor andino"
+    >
+
+    <p id="error_nombre_ave" class="mensaje-error"></p>
+
+  </fieldset>
+
+
+  <br><br>
+
+
+  <fieldset>
+
+    <legend>Información del avistamiento</legend>
+
+
+    <label for="region">Región (*):</label>
+
+    <select id="region" name="region">
+
+      <option value="">
+        Seleccione una región
+      </option>
+
+      <option value="metropolitana">Región Metropolitana</option>
+      <option value="valparaiso">Región de Valparaíso</option>
+      <option value="ohiggins">Región de O'Higgins</option>
+      <option value="maule">Región del Maule</option>
+      <option value="nuble">Región de Ñuble</option>
+      <option value="biobio">Región del Biobío</option>
+      <option value="araucania">Región de La Araucanía</option>
+      <option value="losrios">Región de Los Ríos</option>
+      <option value="loslagos">Región de Los Lagos</option>
+      <option value="aysen">Región de Aysén</option>
+      <option value="magallanes">Región de Magallanes</option>
+      <option value="arica">Región de Arica y Parinacota</option>
+      <option value="tarapaca">Región de Tarapacá</option>
+      <option value="antofagasta">Región de Antofagasta</option>
+      <option value="atacama">Región de Atacama</option>
+      <option value="coquimbo">Región de Coquimbo</option>
+
+    </select>
+
+    <p id="error_region" class="mensaje-error"></p>
+
+
+    <label for="comuna">Comuna (*):</label>
+
+    <input
+      type="text"
+      id="comuna"
+      name="comuna"
+    >
+
+    <p id="error_comuna" class="mensaje-error"></p>
+
+
+    <label for="lugar">Lugar (*):</label>
+
+    <input
+      type="text"
+      id="lugar"
+      name="lugar"
+      placeholder="Ej: Parque Mahuida"
+    >
+
+    <p id="error_lugar" class="mensaje-error"></p>
+
+
+    <label for="fecha">
+      Fecha del avistamiento (*):
+    </label>
+
+    <input
+      type="date"
+      id="fecha"
+      name="fecha"
+    >
+
+    <p id="error_fecha" class="mensaje-error"></p>
+
+
+    <label for="hora">
+      Hora del avistamiento (*):
+    </label>
+
+    <input
+      type="time"
+      id="hora"
+      name="hora"
+    >
+
+    <p id="error_hora" class="mensaje-error"></p>
+
+  </fieldset>
+
+
+  <br><br>
+
+
+  <fieldset>
+
+    <legend>Registro audiovisual</legend>
+
+
+    <label for="archivo">
+      Foto o video del avistamiento (*):
+    </label>
+
+    <input
+      type="file"
+      id="archivo"
+      name="archivo"
+      accept="image/*,video/*"
+    >
+
+    <p id="error_archivo" class="mensaje-error"></p>
+
+
+    <label for="comentarios">
+      Comentarios adicionales (opcional):
+    </label>
+
+    <textarea
+      id="comentarios"
+      name="comentarios"
+      maxlength="500"
+    ></textarea>
+
+    <p id="error_comentarios" class="mensaje-error"></p>
+
+  </fieldset>
+
+
+  <button type="submit">
+    Registrar avistamiento
+  </button>
+
+</form>
+
+</main>
+
+<script src="registro-avistamiento.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Estadísticas</title>
+
+<style type="text/css">
+     body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #eaf7f2;
+      color: #263238;
+    }
+
+    /* Imagen de portada */
+    .imagen-portada {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Contenido principal */
+    main {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #2e7d32;
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .descripcion {
+      max-width: 650px;
+      margin: 0 auto 30px auto;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #455a64;
+    }
+
+      .indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 30px auto;
+    }
+
+    .indicador {
+    background-color: white;
+    width: 250px;
+    padding: 25px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.15);
+    }
+
+    .indicador h3 {
+    color: #356859;
+    }
+
+    .numero-indicador {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin: 10px;
+    }
+
+
+    /* GRÁFICOS */
+
+    .seccion-grafico {
+    max-width: 750px;
+
+    margin: 40px auto;
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* Cada fila del gráfico */
+
+    .fila-grafico {
+    margin-bottom: 18px;
+    }
+
+
+    /* Nombre de la categoría */
+
+    .nombre-barra {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #356859;
+    }
+
+
+    /* Fondo de la barra */
+
+    .contenedor-barra {
+    width: 100%;
+    background-color: #eaf7f2;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+
+    /* Parte coloreada */
+
+    .barra {
+    background-color: #26a69a;
+    padding: 8px;
+    color: white;
+
+    text-align: right;
+
+    box-sizing: border-box;
+
+    min-width: 40px;
+
+    border-radius: 8px;
+    }
+</style>
+
+</head>
+
+
+<body>
+
+  
+  <header>
+
+    <nav>
+      <a href="intermedio.html">← Volver al menú</a>
+    </nav>
+  </header>
+
+  <main>
+    
+  <h1> Estadísticas</h1>
+
+    <!-- INDICADORES GENERALES -->
+
+    <section>
+
+      <h2>Indicadores generales</h2>
+
+      <section class="indicadores">
+
+        <article class="indicador">
+
+          <h3>Voluntarios registrados</h3>
+
+          <p
+            id="total-voluntarios"
+            class="numero-indicador"
+          >
+            0
+          </p>
+
+        </article>
+
+
+        <article class="indicador">
+
+          <h3>Avistamientos registrados</h3>
+
+          <p
+            id="total-avistamientos"
+            class="numero-indicador"
+          >
+            0
+          </p>
+
+        </article>
+
+      </section>
+
+    </section>
+
+
+
+    <!-- AVISTAMIENTOS POR TIPO -->
+
+    <section class="seccion-grafico">
+
+      <h2>
+        Avistamientos por tipo de ave
+      </h2>
+
+      <div id="grafico-tipos">
+      </div>
+
+    </section>
+
+
+
+    <!-- VOLUNTARIOS POR REGIÓN -->
+
+    <section class="seccion-grafico">
+
+      <h2>
+        Voluntarios por región
+      </h2>
+
+      <div id="grafico-regiones">
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Datos ficticios de avistamientos -->
+  <script src="datos.js"></script>
+
+  <!-- Código de estadísticas -->
+  <script src="estadisticas.js"></script>
+
+</body>
+
+</html>
