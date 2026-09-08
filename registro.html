@@ -101,10 +101,12 @@ button:hover {
 
   </header>
 
+<main>
 <h1> Formulario de registro de voluntario</h1>
+<p>(*) Campos obligatorios</p>
 <form id="registroForm" novalidate>
 
-  <label for="full_name">Nombre completo:</label>
+  <label for="full_name">Nombre completo(*):</label>
   <input type="text" id="full_name" name="full_name" placeholder="Jane Doe" >
   <p id="error_nombre" class="mensaje-error"></p>
 
@@ -112,15 +114,15 @@ button:hover {
   <input type="email" id="email_addr" name="email_addr">
   <p id="error_email" class="mensaje-error"></p>
 
-  <label for="email_addr_repeat">Repita su dirección de correo electrónico:</label>
-  <input type="email" id="email_addr_repeat" name="email_addr_repeat" oninput="checkemail(this)">
+  <label for="email_addr_repeat">Repita su dirección de correo electrónico(*):</label>
+  <input type="email" id="email_addr_repeat" name="email_addr_repeat">
   <p id="error_email_repeat" class="mensaje-error"></p>
 
   <label for="cel">Número de teléfono (+56):</label>
   <input type="tel" id="cel" name="cel">
   <p id="error_cel" class="mensaje-error"></p>
 
-  <label for="region">Región:</label>
+  <label for="region">Región(*):</label>
     <select id="region" name="region">
         <option value="">Seleccione una región</option>
         <option value="metropolitana">Región Metropolitana</option>
@@ -144,7 +146,7 @@ button:hover {
 
     <br><br> 
 
-  <label for="comuna">Comuna:</label>
+  <label for="comuna">Comuna(*):</label>
   <input type="text" id="comuna" name="comuna">
   <p id="error_comuna" class="mensaje-error"></p>
 
@@ -157,6 +159,7 @@ button:hover {
   <!-- <input type="submit" value="Request Reservation">  -->
   <button type="submit">Registrar voluntario</button>
 </form>
+</main>
 
 <script src="registro.js"></script>
 

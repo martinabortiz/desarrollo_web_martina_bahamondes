@@ -83,5 +83,4 @@ const avistamientos = [
     tipoArchivo: "imagen",
     archivo: "img/tenca.jpg"
   }
-
 ];
