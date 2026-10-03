@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <title>Detalle del avistamiento</title>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <style type="text/css">
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #eaf7f2;
+      color: #263238;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c5598;
+      margin-bottom: 25px;
+    }
+
+    .detalle {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .detalle p {
+      margin-bottom: 15px;
+    }
+
+    .detalle strong {
+      color: #355468;
+    }
+
+    .imagen-avistamiento,
+    .video-avistamiento {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    nav {
+      margin-bottom: 20px;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <header>
+
+    <nav>
+      <a href="{{ url_for('intermedio') }}">
+        ← Volver al menú principal
+      </a>
+      <br>
+      <a href="{{ url_for('listado_avistamientos') }}">
+        ← Volver al listado
+      </a>      
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <h1>
+      Detalle del avistamiento
+    </h1>
+
+
+    <section class="detalle">
+
+      <h2>
+        {{ avistamiento.ave.nombre }}
+      </h2>
+
+
+      <p>
+        <strong>Voluntario:</strong>
+        {{ avistamiento.voluntario.nombre }}
+      </p>
+
+
+      <p>
+        <strong>Región:</strong>
+
+        {% if avistamiento.comuna %}
+          {{ avistamiento.comuna.region.nombre }}
+        {% else %}
+          Sin información
+        {% endif %}
+      </p>
+
+
+      <p>
+        <strong>Comuna:</strong>
+
+        {% if avistamiento.comuna %}
+          {{ avistamiento.comuna.nombre }}
+        {% else %}
+          Sin información
+        {% endif %}
+      </p>
+
+
+      <p>
+        <strong>Lugar:</strong>
+        {{ avistamiento.lugar }}
+      </p>
+
+
+      <p>
+        <strong>Fecha:</strong>
+        {{ avistamiento.fecha_hora.strftime("%d-%m-%Y") }}
+      </p>
+
+
+      <p>
+        <strong>Hora:</strong>
+        {{ avistamiento.fecha_hora.strftime("%H:%M") }}
+      </p>
+
+
+      <p>
+        <strong>Descripción:</strong>
+
+        {% if avistamiento.descripcion %}
+          {{ avistamiento.descripcion }}
+        {% else %}
+          Sin comentarios adicionales.
+        {% endif %}
+      </p>
+
+
+      <h3>Registro audiovisual</h3>
+
+
+      {% if avistamiento.registros %}
+
+        {% for registro in avistamiento.registros %}
+
+          {% set nombre = registro.nombre_archivo.lower() %}
+
+          {% if
+            nombre.endswith(".jpg")
+            or nombre.endswith(".jpeg")
+            or nombre.endswith(".png")
+            or nombre.endswith(".gif")
+          %}
+
+            <img
+              src="{{ url_for('static', filename=registro.ruta_archivo) }}"
+              alt="Fotografía del avistamiento"
+              class="imagen-avistamiento"
+            >
+
+          {% else %}
+
+            <video
+              src="{{ url_for('static', filename=registro.ruta_archivo) }}"
+              controls
+              class="video-avistamiento"
+            >
+            </video>
+
+          {% endif %}
+
+        {% endfor %}
+
+      {% else %}
+
+        <p>
+          Este avistamiento no tiene archivos asociados.
+        </p>
+
+      {% endif %}
+
+    </section>
+
+  </main>
+
+</body>
+
+</html>
