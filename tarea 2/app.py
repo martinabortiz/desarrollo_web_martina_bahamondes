@@ -136,6 +136,9 @@ def registrar_avistamiento():
             ):
                 error = "La comuna seleccionada no pertenece a la región."
 
+            elif len(descripcion.strip()) > 500:
+                error = "La descripción no puede superar los 500 caracteres."
+
             # Validar archivos
             elif (
                 len(archivos) == 0

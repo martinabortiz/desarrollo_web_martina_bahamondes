@@ -42,14 +42,14 @@ CREATE TABLE avistamiento (
     id INT NOT NULL AUTO_INCREMENT,
     voluntario_id INT NOT NULL,
     ave_id INT NOT NULL,
+    comuna_id INT NOT NULL,
     fecha_hora DATETIME NOT NULL,
     lugar VARCHAR(200) NOT NULL,
     descripcion TEXT,
     PRIMARY KEY (id),
-    FOREIGN KEY (voluntario_id)
-        REFERENCES voluntario(id),
-    FOREIGN KEY (ave_id)
-        REFERENCES ave(id)
+    FOREIGN KEY (voluntario_id) REFERENCES voluntario(id),
+    FOREIGN KEY (ave_id) REFERENCES ave(id),
+    FOREIGN KEY (comuna_id) REFERENCES comuna(id)
 );
 
 CREATE TABLE registro (
@@ -62,21 +62,3 @@ CREATE TABLE registro (
         REFERENCES avistamiento(id)
 );
 
-USE tarea2;
-
-SELECT COUNT(*) FROM region;
-SELECT COUNT(*) FROM comuna;
-SELECT COUNT(*) FROM ave;
-SELECT COUNT(*) FROM voluntario;
-
-SELECT * FROM voluntario;
-
-SELECT * FROM avistamiento;
-
-ALTER TABLE avistamiento
-ADD COLUMN comuna_id INT NULL,
-ADD CONSTRAINT fk_avistamiento_comuna
-FOREIGN KEY (comuna_id) REFERENCES comuna(id);
-
-SELECT id, ave_id, comuna_id, lugar
-FROM avistamiento;
