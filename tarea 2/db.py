@@ -3,6 +3,29 @@ from sqlalchemy.orm import sessionmaker, joinedload, selectinload
 from datetime import datetime
 from models import Region, Comuna, Voluntario, Ave, Avistamiento, Registro
 
+
+DB_NAME = "tarea2"
+DB_USERNAME = "cc5002"
+DB_PASSWORD = "programacionweb"
+DB_HOST = "localhost"
+DB_PORT = 3306
+
+
+DATABASE_URL = (
+    f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}"
+    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)
+
+
+engine = create_engine(
+    DATABASE_URL,
+    echo=False,
+    future=True
+)
+
+SessionLocal = sessionmaker(bind=engine)
+
+
 def get_regiones():
     session = SessionLocal()
 
@@ -61,33 +84,6 @@ def create_voluntario(nombre, email, telefono, comuna_id):
     session.close()
 
     return voluntario_id
-
-DB_NAME = "tarea2"
-DB_USERNAME = "cc5002"
-DB_PASSWORD = "programacionweb"
-DB_HOST = "localhost"
-DB_PORT = 3306
-
-
-DATABASE_URL = (
-    f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-)
-
-
-engine = create_engine(
-    DATABASE_URL,
-    echo=False,
-    future=True
-)
-
-SessionLocal = sessionmaker(bind=engine)
-
-def get_voluntarios():
-    session = SessionLocal()
-    voluntarios = session.query(Voluntario).all()
-    session.close()
-    return voluntarios
 
 
 def get_aves():

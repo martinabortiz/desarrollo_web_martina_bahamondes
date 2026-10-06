@@ -1,5 +1,5 @@
 import re
-
+from datetime import datetime
 
 def validate_nombre(nombre):
     if nombre is None:
@@ -87,6 +87,26 @@ def validate_avistamiento(
         return False
 
     if fecha_hora is None:
+        return False
+
+        ahora = datetime.now()
+
+    # No puede estar en el futuro
+    if fecha_hora > ahora:
+        return False
+
+    # No puede tener más de un año
+    try:
+        hace_un_ano = ahora.replace(
+            year=ahora.year - 1
+        )
+    except ValueError:
+        hace_un_ano = ahora.replace(
+            year=ahora.year - 1,
+            day=28
+        )
+
+    if fecha_hora < hace_un_ano:
         return False
 
     if lugar is None:

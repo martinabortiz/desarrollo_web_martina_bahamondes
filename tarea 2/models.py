@@ -83,9 +83,9 @@ class Avistamiento(Base):
         nullable=False
     )
     fecha_hora = Column(DateTime, nullable=False)
-    comuna = relationship("Comuna", back_populates="avistamientos")
     lugar = Column(String(200), nullable=False)
     descripcion = Column(Text, nullable=True)
+    comuna = relationship("Comuna", back_populates="avistamientos")
 
     voluntario = relationship("Voluntario", back_populates="avistamientos")
     ave = relationship("Ave", back_populates="avistamientos")

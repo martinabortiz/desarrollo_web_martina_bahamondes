@@ -14,10 +14,22 @@ UPLOAD_FOLDER = "static/uploads"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
+os.makedirs(
+    app.config["UPLOAD_FOLDER"],
+    exist_ok=True
+)
+
 EXTENSIONES_PERMITIDAS = {
     "png", "jpg", "jpeg", "gif",
     "mp4", "mov", "avi"
 }
+
+def archivo_permitido(nombre_archivo):
+    return (
+        "." in nombre_archivo
+        and nombre_archivo.rsplit(".", 1)[1].lower()
+        in EXTENSIONES_PERMITIDAS
+    )
 
 @app.route("/listado-aves.html")
 def listado_avistamientos():
@@ -70,8 +82,12 @@ def listado_avistamientos():
 
 @app.route("/")
 def index():
+
+    ultimos_avistamientos = db.get_ultimos_avistamientos()
+
     return render_template(
-        "inicio.html"
+        "inicio.html",
+        ultimos_avistamientos=ultimos_avistamientos
     )
 
 @app.route("/estadisticas.html")
