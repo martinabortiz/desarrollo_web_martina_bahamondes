@@ -1,0 +1,10 @@
+
+.venv/
+__pycache__/
+*.pyc
+notas.md
+guia_estudio_tarea2_herramientas.md
+
+guia_teorica_herramientas_desarrollo_web.md
+
+guia_repaso_proyecto_entrevista.md
