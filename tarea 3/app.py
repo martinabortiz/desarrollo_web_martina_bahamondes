@@ -1,7 +1,7 @@
-from flask import Flask, request, render_template, redirect, url_for,session, flash
+from flask import Flask, request, render_template, redirect, url_for, session, flash, jsonify
 import db
 from datetime import datetime
-from validations import validate_voluntario, validate_avistamiento
+from validations import validate_voluntario, validate_avistamiento, validate_comentario
 from uuid import uuid4
 from werkzeug.utils import secure_filename
 import os
@@ -93,6 +93,31 @@ def index():
 @app.route("/estadisticas.html")
 def estadisticas():
     return render_template("estadisticas.html")
+
+@app.route("/api/estadisticas/avistamientos-dia")
+def estadisticas_avistamientos_dia():
+
+    datos = db.get_estadisticas_por_dia()
+
+    return jsonify(datos)
+
+@app.route("/api/estadisticas/avistamientos-ave")
+def estadisticas_avistamientos_ave():
+
+    datos = db.get_estadisticas_por_ave()
+
+    return jsonify(datos)
+
+@app.route("/api/estadisticas/totales")
+def estadisticas_totales():
+    return jsonify(db.get_totales())
+
+@app.route("/api/estadisticas/voluntarios-comuna")
+def estadisticas_voluntarios_comuna():
+
+    datos = db.get_estadisticas_por_comuna()
+
+    return jsonify(datos)
 
 @app.route("/registro-ave.html", methods=["GET", "POST"])
 def registrar_avistamiento():
@@ -344,6 +369,55 @@ def detalle_avistamiento(avistamiento_id):
         avistamiento=avistamiento
     )
 
+@app.route("/api/avistamiento/<int:avistamiento_id>/comentarios")
+def obtener_comentarios(avistamiento_id):
+
+    if db.get_avistamiento_by_id(avistamiento_id) is None:
+        return jsonify({"error": "El avistamiento no existe."}), 404
+
+    comentarios = db.get_comentarios_by_avistamiento(avistamiento_id)
+
+    resultado = []
+
+    for comentario in comentarios:
+        resultado.append({
+            "nombre": comentario.nombre,
+            "texto": comentario.texto,
+            "fecha": comentario.fecha.strftime("%d-%m-%Y %H:%M")
+        })
+
+    return jsonify(resultado)
+
+@app.route("/api/avistamiento/<int:avistamiento_id>/comentarios", methods=["POST"])
+def agregar_comentario(avistamiento_id):
+
+    datos = request.get_json(silent=True)
+
+    if not isinstance(datos, dict):
+        return jsonify({"error": "Datos no válidos."}), 400
+
+    nombre = datos.get("nombre")
+    texto = datos.get("texto")
+
+    if not isinstance(nombre, str) or not isinstance(texto, str):
+        return jsonify({"error": "Nombre y comentario deben ser textos."}), 400
+
+    if not validate_comentario(nombre, texto):
+        return jsonify({"error": "Nombre o comentario no válido."}), 400
+
+    if db.get_avistamiento_by_id(avistamiento_id) is None:
+        return jsonify({"error": "El avistamiento no existe."}), 404
+
+    comentario_id = db.create_comentario(
+        nombre,
+        texto,
+        avistamiento_id
+    )
+
+    return jsonify({
+        "mensaje": "Comentario agregado exitosamente.",
+        "id": comentario_id
+    }), 201
 
 @app.route("/intermedio")
 def intermedio():

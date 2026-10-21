@@ -138,7 +138,18 @@
 
     border-radius: 8px;
     }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    .contenedor-torta {
+        max-width: 450px;
+        margin: 20px auto;
+    }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -171,9 +182,8 @@
 
         <h3>Voluntarios registrados</h3>
 
-        <p class="numero-indicador">
-          
-        </p>
+        <p class="numero-indicador" id="total-voluntarios">0</p>
+        
 
       </article>
 
@@ -182,9 +192,8 @@
 
         <h3>Avistamientos registrados</h3>
 
-        <p class="numero-indicador">
-          
-        </p>
+        <p class="numero-indicador" id="total-avistamientos">0</p>
+
 
       </article>
 
@@ -193,18 +202,51 @@
 
     <section class="seccion-grafico">
 
-      <h2>
-        Estadísticas de avistamientos
-      </h2>
+      <h2>Avistamientos registrados por día</h2>
 
       <p>
-        Esta funcionalidad será implementada
-        en la siguiente tarea.
+        Cantidad de avistamientos registrados para cada fecha.
       </p>
+
+      <canvas id="grafico-avistamientos"></canvas>
+
+      <p id="mensaje-grafico" role="status"></p>
+
+    </section>
+
+    <section class="seccion-grafico">
+
+      <h2>Avistamientos por tipo de ave</h2>
+
+      <p>
+        Distribución de los avistamientos según el tipo de ave.
+      </p>
+
+      <div class="contenedor-torta">
+        <canvas id="grafico-aves"></canvas>
+      </div>
+
+      <p id="mensaje-grafico-aves" role="status"></p>
+
+    </section>
+
+    <section class="seccion-grafico">
+
+      <h2>Voluntarios registrados por comuna</h2>
+
+      <p>
+        Cantidad de voluntarios registrados en cada comuna.
+      </p>
+
+      <canvas id="grafico-comunas"></canvas>
+
+      <p id="mensaje-grafico-comunas" role="status"></p>
 
     </section>
 
   </main>
+
+<script src="{{ url_for('static', filename='js/estadisticas.js') }}"></script>
 
 </body>
 </html>

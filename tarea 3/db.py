@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, joinedload, selectinload
 from datetime import datetime
-from models import Region, Comuna, Voluntario, Ave, Avistamiento, Registro
-
+from models import Region, Comuna, Voluntario, Ave, Avistamiento, Registro, Comentario
+from sqlalchemy import func
 
 DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
@@ -220,3 +220,146 @@ def get_ultimos_avistamientos():
     session.close()
 
     return avistamientos
+
+
+def create_comentario(nombre, texto, avistamiento_id):
+    session = SessionLocal()
+    '''busca comentario asociado a un avistamiento y lo crea en la base de datos'''
+    try:
+        nuevo = Comentario(
+            nombre=nombre.strip(),
+            texto=texto.strip(),
+            fecha=datetime.now(),
+            avistamiento_id=avistamiento_id
+        )
+
+        session.add(nuevo)
+        session.commit()
+
+        return nuevo.id
+
+    except Exception:
+        session.rollback()
+        raise
+
+    finally:
+        session.close()
+
+def get_comentarios_by_avistamiento(avistamiento_id):
+    session = SessionLocal()
+
+    try:
+        comentarios = (
+            session.query(Comentario)
+            .filter_by(avistamiento_id=avistamiento_id)
+            .order_by(Comentario.fecha.desc(), Comentario.id.desc())
+            .all()
+        )
+
+        session.expunge_all()
+
+        return comentarios
+
+    finally:
+        session.close()
+
+
+def get_estadisticas_por_dia():
+    session = SessionLocal()
+
+    try:
+        resultados = (
+            session.query(
+                func.date(Avistamiento.fecha_hora),
+                func.count(Avistamiento.id)
+            )
+            .group_by(func.date(Avistamiento.fecha_hora))
+            .order_by(func.date(Avistamiento.fecha_hora))
+            .all()
+        )
+
+        return [
+            {
+                "fecha": str(fecha),
+                "cantidad": cantidad
+            }
+            for fecha, cantidad in resultados
+        ]
+
+    finally:
+        session.close()
+
+
+def get_estadisticas_por_ave():
+    session = SessionLocal()
+
+    try:
+        resultados = (
+            session.query(
+                Ave.nombre,
+                func.count(Avistamiento.id)
+            )
+            .join(Avistamiento, Avistamiento.ave_id == Ave.id)
+            .group_by(Ave.id, Ave.nombre)
+            .order_by(Ave.nombre)
+            .all()
+        )
+
+        return [
+            {
+                "ave": nombre,
+                "cantidad": cantidad
+            }
+            for nombre, cantidad in resultados
+        ]
+
+    finally:
+        session.close()
+
+
+def get_estadisticas_por_comuna():
+    session = SessionLocal()
+
+    try:
+        resultados = (
+            session.query(
+                Comuna.nombre,
+                func.count(Voluntario.id)
+            )
+            .join(Voluntario, Voluntario.comuna_id == Comuna.id)
+            .group_by(Comuna.id, Comuna.nombre)
+            .order_by(Comuna.nombre)
+            .all()
+        )
+
+        return [
+            {
+                "comuna": nombre,
+                "cantidad": cantidad
+            }
+            for nombre, cantidad in resultados
+        ]
+
+    finally:
+        session.close()
+
+
+def get_totales():
+    session = SessionLocal()
+
+    try:
+        total_voluntarios = session.query(
+            func.count(Voluntario.id)
+        ).scalar()
+
+        total_avistamientos = session.query(
+            func.count(Avistamiento.id)
+        ).scalar()
+
+        return {
+            "voluntarios": total_voluntarios,
+            "avistamientos": total_avistamientos
+        }
+
+    finally:
+        session.close()

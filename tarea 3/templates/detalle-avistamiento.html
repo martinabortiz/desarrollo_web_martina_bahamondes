@@ -58,9 +58,42 @@
       margin-bottom: 20px;
     }
 
+        #form-comentario {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #form-comentario input,
+    #form-comentario textarea {
+      padding: 10px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      font: inherit;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    #form-comentario button {
+      background-color: #2c5598;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .comentario {
+      border-bottom: 1px solid #ddd;
+      padding: 12px 0;
+      overflow-wrap: anywhere;
+    }
+
   </style>
 
 </head>
+
 
 
 <body>
@@ -195,10 +228,54 @@
 
       {% endif %}
 
+        <hr>
+
+        <h3>Comentarios del avistamiento</h3>
+
+        <div id="lista-comentarios">
+          <p>Cargando comentarios...</p>
+        </div>
+
+        <h3>Agregar un comentario</h3>
+
+        <form
+          id="form-comentario"
+          data-url="{{ url_for('obtener_comentarios', avistamiento_id=avistamiento.id) }}"
+          >
+
+          <label for="nombre-comentario">Nombre:</label>
+          <input
+            type="text"
+            id="nombre-comentario"
+            name="nombre"
+            minlength="3"
+            maxlength="50"
+            required
+          >
+
+          <label for="texto-comentario">Comentario:</label>
+          <textarea
+            id="texto-comentario"
+            name="texto"
+            rows="3"
+            cols="40"
+            minlength="5"
+            maxlength="300"
+            required
+          ></textarea>
+
+          <button type="submit">Agregar comentario</button>
+
+          <p id="mensaje-comentario" role="status" aria-live="polite"></p>
+
+        </form>
+
     </section>
 
   </main>
 
+
+<script src="{{ url_for('static', filename='js/comentario.js') }}"></script>
 </body>
 
 </html>

@@ -89,7 +89,7 @@ def validate_avistamiento(
     if fecha_hora is None:
         return False
 
-        ahora = datetime.now()
+    ahora = datetime.now()
 
     # No puede estar en el futuro
     if fecha_hora > ahora:
@@ -118,3 +118,15 @@ def validate_avistamiento(
         return False
 
     return True
+
+def validate_comentario(nombre, texto):
+    if nombre is None or texto is None:
+        return False
+
+    nombre = nombre.strip()
+    texto = texto.strip()
+
+    return (
+        3 <= len(nombre) <= 50
+        and 5 <= len(texto) <= 300
+    )
