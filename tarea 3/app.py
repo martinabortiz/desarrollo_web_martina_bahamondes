@@ -5,10 +5,12 @@ from validations import validate_voluntario, validate_avistamiento, validate_com
 from uuid import uuid4
 from werkzeug.utils import secure_filename
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-app.secret_key = "clave_tarea2"
+load_dotenv(override=True)
+app.secret_key = os.environ["SECRET_KEY"]
 
 UPLOAD_FOLDER = "static/uploads"
 

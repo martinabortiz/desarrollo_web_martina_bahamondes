@@ -3,13 +3,27 @@ from sqlalchemy.orm import sessionmaker, joinedload, selectinload
 from datetime import datetime
 from models import Region, Comuna, Voluntario, Ave, Avistamiento, Registro, Comentario
 from sqlalchemy import func
+import os
+from dotenv import load_dotenv
+from sqlalchemy.engine import URL
 
-DB_NAME = "tarea2"
-DB_USERNAME = "cc5002"
-DB_PASSWORD = "programacionweb"
-DB_HOST = "localhost"
-DB_PORT = 3306
 
+load_dotenv(override=True)
+
+DB_NAME = os.environ["DB_NAME"]
+DB_USERNAME = os.environ["DB_USERNAME"]
+DB_PASSWORD = os.environ["DB_PASSWORD"]
+DB_HOST = os.environ["DB_HOST"]
+DB_PORT = int(os.environ["DB_PORT"])
+
+DATABASE_URL = URL.create(
+    "mysql+pymysql",
+    username=DB_USERNAME,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    port=DB_PORT,
+    database=DB_NAME
+)
 
 DATABASE_URL = (
     f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}"
