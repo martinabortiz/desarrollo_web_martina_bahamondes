@@ -33,6 +33,11 @@ def archivo_permitido(nombre_archivo):
         in EXTENSIONES_PERMITIDAS
     )
 
+@app.route("/buscador.html")
+def buscador():
+    return render_template("buscador.html")
+
+
 @app.route("/listado-aves.html")
 def listado_avistamientos():
 
